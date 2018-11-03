@@ -1,0 +1,104 @@
+  <div class="counter">
+  <section class="sheet padding-20mm" id="program1">
+    <!-- Write HTML just like a web page -->
+    <div class="border">
+      <article>
+        <h1 class="w3-center">FFT of Rectangular Pulse</h1>
+        <h2>Aim</h2>
+        <p>Create a rectangular pulse. Plot the wave. Compute and plot its FFT. Shift the spectrum into frequency domain.</p>
+        <h2>Theory</h2>
+        <p>A fast Fourier transform (FFT) is an algorithm that samples a signal over a period of time (or space) and divides it into its frequency components. These components are single sinusoidal oscillations at distinct frequencies each with their own amplitude and phase.</p>
+        \[X(k)=\sum_{n=1}^{N}x(n)e^{-\frac{j2\pi(k-1)(n-1)}{N}}, 1\leq k \leq N\] The inverse DFT (computed by IFFT) is given by, \[X(k)=\frac{1}{N}\sum_{n=1}^{N}x(k)e^{-\frac{j2\pi(k-1)(n-1)}{N}}, 1\leq n \leq N\]
+        <h2>MATLAB Commands Used</h2>
+        <ul>
+        <li><b>fftshift</b>: Shift zero-frequency component to center of spectrum. For vectors, fftshift(X) swaps the left and right halves of X. For matrices, fftshift(X) swaps the first and third quadrants and the second and fourth quadrants. For N-D arrays, fftshift(X) swaps "half-spaces" of X along each dimension.</li>
+        <h4>Syntax</h4>
+        <pre>
+          <code class="language-matlab">
+            Y = fftshift(X)
+            Y = fftshift(X,dim)
+          </code>
+        </pre>
+        <li><b>fft</b>: fft(X) is the discrete Fourier transform (DFT) of vector X. For matrices, the fft operation is applied to each column. For N-D arrays, the fft operation</li>
+        </ul>
+   </article>
+    </div>
+  </section>
+<section class="sheet padding-20mm">
+    <!-- Write HTML just like a web page -->
+    <div class="border">
+      <article>
+       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;operates on the first non-singleton dimension.
+        <h4>Syntax</h4>
+        <pre>
+          <code class="language-matlab">
+Y = fft(X)
+Y = fft(X,n)
+Y = fft(X,[],dim)
+Y = fft(X,n,dim)
+          </code>
+        </pre>
+        <ul>
+        <li><b>abs</b>: abs(X) is the absolute value of the elements of X. When X is complex, abs(X) is the
+complex modulus (magnitude) of the elements of X.</li>
+     <h4>Syntax</h4>
+     <pre>
+       <code class="language-matlab">
+         Y = abs(X)
+       </code>
+     </pre>
+      </ul>
+      <h2>Flow Chart</h2>
+      <figure class="figure">
+  <img src="img/program-1-flow-chart.png" alt="flow-chart">
+  <figcaption>Flow chart</figcaption>
+</figure>
+  </article>
+    </div>
+  </section>
+  <section class="sheet padding-20mm">
+    <div class="border">
+      <article>
+        <h2>Program</h2>
+      <div style="margin-left:15px;margin-right:10px;font-size:14px;">
+      <pre class="line-numbers">
+      <code class="language-matlab">
+[s,t]=gensig('square',1,1.4,0.005);
+subplot(3,1,1);
+plot(t,s);
+title('Square Pulse');
+ylim([-0.3 1.3,]);
+a=fft(s);
+b=abs(a);
+subplot(3,1,2);
+title('FFT without fftshift');
+c=fftshift(b);
+subplot(3,1,3);
+plot(t,c);
+title('FFT with fftshift');
+xlim([0.2 1.2]);
+ylim([-5 110]);
+      </code></pre>
+        </div>
+        <h2>Output</h2>
+<figure class="figure">
+  <img src="img/FFT_rectPulse.png" alt="output">
+  <figcaption>Input and Output Graphs</figcaption>
+</figure>
+      </article>
+    </div>
+  </section>
+  <section class="sheet padding-20mm">
+    <div class="border">
+      <article>
+      <h2>Inference</h2>
+        <ul>
+          <li>The rectangular pulse is plotted using gensig command of MATLAB.</li>
+          <li>The FFT is taken using fft command of MATLAB.</li>
+          <li>The FFT taken using FFT command is plotted on complex plain. So absolute value of FFt is taken using abs command.</li>
+          <li>But the sinc function does not obtained as we expect. So fftshift is used to obtain sinc function as output</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+  </div>
